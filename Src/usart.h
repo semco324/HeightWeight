@@ -52,7 +52,6 @@ void MX_USART3_UART_Init(uint32_t baud);
 /* USER CODE BEGIN Prototypes */
 typedef struct UartInfo
 {
-	
     _Bool   reover;             //接收完成标志
     uint8_t datalen;            //接收到的数据长度
     uint8_t dataIndex;          //接收数组的索�?
