@@ -28,7 +28,7 @@
 
 /* Private includes ----------------------------------------------------------*/
 /* USER CODE BEGIN Includes */
-
+#include "usart.h"
 /* USER CODE END Includes */
 
 /* Exported types ------------------------------------------------------------*/
@@ -54,11 +54,12 @@ void BusFault_Handler(void);
 void UsageFault_Handler(void);
 void DebugMon_Handler(void);
 void SysTick_Handler(void);
+void TIM2_IRQHandler(void);
 void USART1_IRQHandler(void);
 void USART2_IRQHandler(void);
 void USART3_IRQHandler(void);
 /* USER CODE BEGIN EFP */
-
+void UartCallback(UART_HandleTypeDef* uartHandle, ReceMessage *meRec); //结构体做函数的参数必须传指针;
 /* USER CODE END EFP */
 
 #ifdef __cplusplus

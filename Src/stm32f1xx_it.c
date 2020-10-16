@@ -57,6 +57,7 @@
 /* USER CODE END 0 */
 
 /* External variables --------------------------------------------------------*/
+extern TIM_HandleTypeDef htim2;
 extern UART_HandleTypeDef huart1;
 extern UART_HandleTypeDef huart2;
 extern UART_HandleTypeDef huart3;
@@ -176,6 +177,20 @@ void SysTick_Handler(void)
 /******************************************************************************/
 
 /**
+  * @brief This function handles TIM2 global interrupt.
+  */
+void TIM2_IRQHandler(void)
+{
+  /* USER CODE BEGIN TIM2_IRQn 0 */
+
+  /* USER CODE END TIM2_IRQn 0 */
+  HAL_TIM_IRQHandler(&htim2);
+  /* USER CODE BEGIN TIM2_IRQn 1 */
+
+  /* USER CODE END TIM2_IRQn 1 */
+}
+
+/**
   * @brief This function handles USART1 global interrupt.
   */
 void USART1_IRQHandler(void)
@@ -218,6 +233,34 @@ void USART3_IRQHandler(void)
 }
 
 /* USER CODE BEGIN 1 */
+void UartCallback(UART_HandleTypeDef* uartHandle, ReceMessage *meRec)   //结构体做函数的参数必须传指针
+{
+	static uint8_t i = 0;
+	uint8_t tempData = 0;
+	uint8_t clear = clear;
+	if (__HAL_UART_GET_FLAG(uartHandle, UART_FLAG_RXNE) != RESET)
+	{
+		//meRec.redata[meRec.dataIndex] = 0;
 
+		tempData = uartHandle->Instance->DR;	//读取接收到的数据
+
+		meRec->redata[meRec->dataIndex] = tempData;
+		meRec->dataIndex++;
+		i++;
+		meRec->reover = 1;
+	}
+	else if (RESET != __HAL_UART_GET_FLAG(uartHandle, UART_FLAG_IDLE))
+	{
+
+		clear = uartHandle->Instance->SR;
+		clear = uartHandle->Instance->DR;
+		i = 0;
+		meRec->datalen = meRec->dataIndex;
+		meRec->dataIndex = 0;
+		meRec->reover = 1;
+		//__HAL_UART_ENABLE_IT(&huart1, UART_IT_TXE);
+	}
+	__HAL_UART_CLEAR_FLAG(uartHandle, UART_FLAG_TC);
+}
 /* USER CODE END 1 */
 /************************ (C) COPYRIGHT STMicroelectronics *****END OF FILE****/
