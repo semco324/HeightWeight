@@ -76,6 +76,7 @@
   </ImportGroup>
   <ItemGroup />
   <ItemGroup>
+    <ClCompile Include="..\..\Src\dwt_stm32_delay.c" />
     <ClCompile Include="..\..\Src\gpio.c" />
     <ClCompile Include="..\..\Src\adc.c" />
     <ClCompile Include="..\..\Src\freertos.c" />
@@ -109,6 +110,7 @@
     <ClCompile Include="..\..\Drivers\STM32F1xx_HAL_Driver\Src\stm32f1xx_hal_flash_ex.c" />
     <ClCompile Include="..\..\Drivers\STM32F1xx_HAL_Driver\Src\stm32f1xx_hal_gpio.c" />
     <ClCompile Include="ultrasonic.c" />
+    <ClInclude Include="..\..\Inc\dwt_stm32_delay.h" />
     <ClInclude Include="BspConfig.h" />
     <ClInclude Include="system.h" />
     <ClInclude Include="ultrasonic.h" />

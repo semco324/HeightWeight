@@ -4,5 +4,8 @@
 #include "stm32f1xx_hal.h"
 
 
-uint8_t Ultrasonic_Init(uint8_t gpioIndex, uint16_t sk_pin, uint16_t dt_pin);
+void Hx711_Sck_Out();
+void Hx711_Data_In();
+void Hx711_Data_Out();
+unsigned long Read_Weigh(uint32_t timout);
 #endif // !__ULTRASONIC_H

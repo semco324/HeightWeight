@@ -27,6 +27,7 @@
 /* Private includes ----------------------------------------------------------*/
 /* USER CODE BEGIN Includes */     
 #include "usart.h"
+#include "ultrasonic.h"
 /* USER CODE END Includes */
 
 /* Private typedef -----------------------------------------------------------*/
@@ -128,6 +129,8 @@ void StartDefaultTask(void const * argument)
   /* Infinite loop */
   for(;;)
   {
+	  //Uart_printf(&huart1, "Uart2 is responsed\r\n");
+	  Read_Weigh(1000);
 	  Uart_printf(&huart1, "Uart2 is responsed\r\n");
     osDelay(100);
   }

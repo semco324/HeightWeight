@@ -30,6 +30,9 @@
 #define PRESSURE_DT_GPIO_Port GPIOB
 #define PRESSURE_SCK_Pin GPIO_PIN_1
 #define PRESSURE_SCK_GPIO_Port GPIOB
+
+#define PRE_SCK		PBout(1)   //时钟
+#define PRE_DT		PBin(0);   //数据
 //------------------------------------------ 语音芯片WTN6040
 #define WTN6040_DATA_Pin GPIO_PIN_12
 #define WTN6040_DATA_GPIO_Port GPIOB
@@ -47,5 +50,5 @@
 #define KEY3_Pin GPIO_PIN_11
 #define KEY3_GPIO_Port GPIOA
 
-
+#define DIV 21.47              //比例因子
 #endif // !__BSPCONFIG_H

@@ -88,7 +88,7 @@ int main(void)
   SystemClock_Config();
 
   /* USER CODE BEGIN SysInit */
-
+  DWT_Delay_Init();//微妙定时初始化
   /* USER CODE END SysInit */
 
   /* Initialize all configured peripherals */
