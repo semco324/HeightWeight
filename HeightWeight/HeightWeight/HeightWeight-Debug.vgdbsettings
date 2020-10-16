@@ -113,23 +113,11 @@
     <ShowMessageAfterExecuting>true</ShowMessageAfterExecuting>
   </CustomShortcuts>
   <UserDefinedVariables />
-  <ImportedPropertySheets />
   <CodeSense>
-    <Enabled>False</Enabled>
-    <CFLAGS />
-    <CXXFLAGS />
-    <ExternalSourceFileList />
+    <Enabled>Unknown</Enabled>
     <ExtraSettings>
       <HideErrorsInSystemHeaders>true</HideErrorsInSystemHeaders>
       <SupportLightweightReferenceAnalysis>false</SupportLightweightReferenceAnalysis>
-      <DiscoverySettings>
-        <Mode>Enabled</Mode>
-        <SearchInProjectDir>true</SearchInProjectDir>
-        <SearchInSourceDirs>true</SearchInSourceDirs>
-        <SearchInIncludeSubdirs>true</SearchInIncludeSubdirs>
-        <IgnoredDirs />
-        <IgnoredHeaders />
-      </DiscoverySettings>
     </ExtraSettings>
     <CodeAnalyzerSettings>
       <Enabled>false</Enabled>
