@@ -104,7 +104,9 @@
       <UniqueIdentifier>{27c9c43a-5860-4897-a20c-09e41e29e26c}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
-  <ItemGroup />
+  <ItemGroup>
+    <None Include="Makefile" />
+  </ItemGroup>
   <ItemGroup>
     <ClCompile Include="..\..\Src\gpio.c">
       <Filter>Source files</Filter>

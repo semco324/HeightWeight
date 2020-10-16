@@ -6,7 +6,7 @@ BINARYDIR := Debug
 
 #Additional flags
 PREPROCESSOR_MACROS := DEBUG=1 flash_layout STM32F103xB USE_FREERTOS
-INCLUDE_DIRS := ..\..\Inc ..\..\Drivers\CMSIS\Device\ST\STM32F1xx\Include ..\..\Drivers\STM32F1xx_HAL_Driver\Inc ..\..\Middlewares\Third_Party\FreeRTOS\Source\include ..\..\Middlewares\Third_Party\FreeRTOS\Source\CMSIS_RTOS ..\..\Middlewares\Third_Party\FreeRTOS\Source\portable\GCC\ARM_CM3 ..\..\Drivers\STM32F1xx_HAL_Driver\Inc\Legacy ..\..\Drivers\STM32F1xx_HAL_Driver\Src
+INCLUDE_DIRS := ..\..\Inc ..\..\Drivers\CMSIS\Device\ST\STM32F1xx\Include ..\..\Drivers\STM32F1xx_HAL_Driver\Inc ..\..\Middlewares\Third_Party\FreeRTOS\Source\include ..\..\Middlewares\Third_Party\FreeRTOS\Source\CMSIS_RTOS ..\..\Middlewares\Third_Party\FreeRTOS\Source\portable\GCC\ARM_CM3 ..\..\Drivers\STM32F1xx_HAL_Driver\Inc\Legacy ..\..\Drivers\STM32F1xx_HAL_Driver\Src ../../Drivers/CMSIS/Device/ST/STM32F1xx/Include ../../Drivers/CMSIS/Include ../../Drivers/CMSIS/RTOS/Template ../../Drivers/STM32F1xx_HAL_Driver/Inc ../../Inc ../../Middlewares/Third_Party/FreeRTOS/Source/include ../../Middlewares/Third_Party/FreeRTOS/Source/portable/GCC/ARM_CM3
 LIBRARY_DIRS := 
 LIBRARY_NAMES := 
 ADDITIONAL_LINKER_INPUTS := 
