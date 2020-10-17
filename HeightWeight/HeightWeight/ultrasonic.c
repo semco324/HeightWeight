@@ -21,6 +21,8 @@ void Hx711_Data_In()//设置成输入
 	GPIO_InitStruct.Mode = GPIO_MODE_INPUT;
 	GPIO_InitStruct.Pull = GPIO_PULLUP;
 	HAL_GPIO_Init(PRESSURE_DT_GPIO_Port, &GPIO_InitStruct);
+
+
 }
 //************************************
 // 函数:    Ultrasonic_Init
@@ -64,11 +66,13 @@ unsigned long Read_Weigh(uint32_t timout)
 	long tim = HAL_GetTick();
 	while (HAL_GetTick()-tim<timout)
 	{
-		if (!HAL_GPIO_ReadPin(PRESSURE_DT_GPIO_Port,PRESSURE_DT_Pin))
+		if (HAL_GPIO_ReadPin(PRESSURE_DT_GPIO_Port, PRESSURE_DT_Pin)==0)
 		{
+			Uart_printf(&huart1, "Test0==%d\r\n", HAL_GPIO_ReadPin(GPIOB, GPIO_PIN_8));
 			break;
 		}
 	}
+	Uart_printf(&huart1, "while--last\r\n");
 	for (i = 0; i < 24; i++)
 	{
 		PRE_SCK = 1;

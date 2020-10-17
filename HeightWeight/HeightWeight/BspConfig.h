@@ -26,12 +26,12 @@
 #define V_TEST_Pin GPIO_PIN_4
 #define V_TEST_GPIO_Port GPIOA
 //压力传感器引脚
-#define PRESSURE_DT_Pin GPIO_PIN_0
+#define PRESSURE_DT_Pin GPIO_PIN_8
 #define PRESSURE_DT_GPIO_Port GPIOB
-#define PRESSURE_SCK_Pin GPIO_PIN_1
+#define PRESSURE_SCK_Pin GPIO_PIN_9
 #define PRESSURE_SCK_GPIO_Port GPIOB
 
-#define PRE_SCK		PBout(1)   //时钟
+#define PRE_SCK		PBout(9)   //时钟
 #define PRE_DT		PBin(0);   //数据
 //------------------------------------------ 语音芯片WTN6040
 #define WTN6040_DATA_Pin GPIO_PIN_12

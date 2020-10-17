@@ -28,6 +28,7 @@
 /* USER CODE BEGIN Includes */     
 #include "usart.h"
 #include "ultrasonic.h"
+#include "BspConfig.h"
 /* USER CODE END Includes */
 
 /* Private typedef -----------------------------------------------------------*/
@@ -127,12 +128,14 @@ void StartDefaultTask(void const * argument)
 
   /* USER CODE BEGIN StartDefaultTask */
   /* Infinite loop */
+	unsigned long val = 0;
   for(;;)
   {
 	  //Uart_printf(&huart1, "Uart2 is responsed\r\n");
-	  Read_Weigh(1000);
-	  Uart_printf(&huart1, "Uart2 is responsed\r\n");
-    osDelay(100);
+	 val = Read_Weigh(1000);
+	  //PBout(9) = 1;
+	  Uart_printf(&huart1, "Uart2 is responsed==%d\r\n",val);
+    osDelay(500);
   }
   /* USER CODE END StartDefaultTask */
 }
