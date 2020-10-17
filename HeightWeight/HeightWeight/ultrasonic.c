@@ -92,7 +92,10 @@ unsigned long Read_Weigh(uint32_t timout)
 	return(Count);
 }
 ///取实际重量=测试-毛坯
-uint16_t GetRealWeight(unsigned long skin)
+uint32_t GetRealWeight(unsigned long skin)
 {
-
+	unsigned long val = 0;
+	val = Read_Weigh(1000);
+	uint32_t res = (val / DIV - 37991 - ERROR) * 10 - skin;
+	return res;
 }

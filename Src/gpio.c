@@ -48,10 +48,10 @@ void MX_GPIO_Init(void)
   __HAL_RCC_GPIOB_CLK_ENABLE();
 
   /*Configure GPIO pin Output Level */
-  HAL_GPIO_WritePin(GPIOB, PRESSURE_SCK_Pin|WTN6040_SCK_Pin, GPIO_PIN_RESET);
+ // HAL_GPIO_WritePin(GPIOB, PRESSURE_SCK_Pin|WTN6040_SCK_Pin, GPIO_PIN_RESET);
 
   /*Configure GPIO pin Output Level */
-  HAL_GPIO_WritePin(WTN6040_DATA_GPIO_Port, WTN6040_DATA_Pin, GPIO_PIN_SET);
+ // HAL_GPIO_WritePin(WTN6040_DATA_GPIO_Port, WTN6040_DATA_Pin, GPIO_PIN_SET);
 
   /*Configure GPIO pins : PAPin PAPin PAPin PAPin */
   GPIO_InitStruct.Pin = WEIGHT_RES_Pin|DISTANCE_RES_Pin|KEY2_Pin|KEY3_Pin;
@@ -60,13 +60,13 @@ void MX_GPIO_Init(void)
   HAL_GPIO_Init(GPIOA, &GPIO_InitStruct);
 
   /*Configure GPIO pins : PBPin PBPin PBPin */
-  GPIO_InitStruct.Pin = PRESSURE_DT_Pin|WTN6040_BUSY_Pin|KEY1_Pin;
+  GPIO_InitStruct.Pin = PRESSURE_DT_Pin|KEY1_Pin;
   GPIO_InitStruct.Mode = GPIO_MODE_INPUT;
   GPIO_InitStruct.Pull = GPIO_PULLUP;
   HAL_GPIO_Init(GPIOB, &GPIO_InitStruct);
 
   /*Configure GPIO pins : PBPin PBPin PBPin */
-  GPIO_InitStruct.Pin = PRESSURE_SCK_Pin|WTN6040_DATA_Pin|WTN6040_SCK_Pin;
+  GPIO_InitStruct.Pin = PRESSURE_SCK_Pin;
   GPIO_InitStruct.Mode = GPIO_MODE_OUTPUT_PP;
   GPIO_InitStruct.Pull = GPIO_PULLUP;
   GPIO_InitStruct.Speed = GPIO_SPEED_FREQ_HIGH;

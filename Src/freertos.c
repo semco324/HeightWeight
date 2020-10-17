@@ -132,11 +132,11 @@ void StartDefaultTask(void const * argument)
   for(;;)
   {
 	  //Uart_printf(&huart1, "Uart2 is responsed\r\n");
-	 val = Read_Weigh(1000);
+	 
 	 
 	  //PBout(9) = 1;
 	 //Uart_printf(&huart1, "Uart2 is responsed==%d\r\n", val);
-	 printf("The Weight is:%dg", (val/ 220-37991-24)*10); fflush(stdout);//必须刷新输出流
+	  printf("The Weight is:%dg", GetRealWeight(0)); fflush(stdout);//必须刷新输出流
     osDelay(500);
   }
   /* USER CODE END StartDefaultTask */

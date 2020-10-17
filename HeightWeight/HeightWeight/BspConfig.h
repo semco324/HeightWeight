@@ -34,14 +34,9 @@
 #define PRE_SCK		PBout(9)   //时钟
 #define PRE_DT		PBin(0);   //数据
 //------------------------------------------ 语音芯片WTN6040
-#define WTN6040_DATA_Pin GPIO_PIN_12
-#define WTN6040_DATA_GPIO_Port GPIOB
-#define WTN6040_SCK_Pin GPIO_PIN_13
-#define WTN6040_SCK_GPIO_Port GPIOB
-#define WTN6040_BUSY_Pin GPIO_PIN_14
-#define WTN6040_BUSY_GPIO_Port GPIOB
-#define  CLK_2A                 PBout(13) //时钟输出（位带操作）
-#define  P_DATA_2A               PBout(12) //数据输出（位带操作）
+
+//#define  CLK_2A                 PBout(13) //时钟输出（位带操作）
+//#define  P_DATA_2A               PBout(12) //数据输出（位带操作）
 //备用按键
 #define KEY1_Pin GPIO_PIN_15
 #define KEY1_GPIO_Port GPIOB
@@ -50,5 +45,6 @@
 #define KEY3_Pin GPIO_PIN_11
 #define KEY3_GPIO_Port GPIOA
 
-#define DIV 24              //比例因子
+#define DIV 220              //比例因子
+#define ERROR		24     //误差调节   +1表示向上加10g 反之表示向下减10g
 #endif // !__BSPCONFIG_H
