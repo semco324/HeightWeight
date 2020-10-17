@@ -136,7 +136,7 @@ void StartDefaultTask(void const * argument)
 	 
 	  //PBout(9) = 1;
 	 //Uart_printf(&huart1, "Uart2 is responsed==%d\r\n", val);
-	 printf("xiaowenlg:%ld", val/1000/24-348); fflush(stdout);//必须刷新输出流
+	 printf("The Weight is:%dg", (val/ 220-37991-24)*10); fflush(stdout);//必须刷新输出流
     osDelay(500);
   }
   /* USER CODE END StartDefaultTask */
