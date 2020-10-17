@@ -29,6 +29,7 @@
 #include "usart.h"
 #include "ultrasonic.h"
 #include "BspConfig.h"
+#include "button.h"
 /* USER CODE END Includes */
 
 /* Private typedef -----------------------------------------------------------*/
@@ -48,7 +49,8 @@
 
 /* Private variables ---------------------------------------------------------*/
 /* USER CODE BEGIN Variables */
-
+uint16_t KeyValue_t = 0xffff; uint16_t lastvalue_t = 0xffff;
+Key_Message keys[5] = { 0 };
 /* USER CODE END Variables */
 osThreadId defaultTaskHandle;
 
@@ -131,11 +133,7 @@ void StartDefaultTask(void const * argument)
 	unsigned long val = 0;
   for(;;)
   {
-	  //Uart_printf(&huart1, "Uart2 is responsed\r\n");
-	 
-	 
-	  //PBout(9) = 1;
-	 //Uart_printf(&huart1, "Uart2 is responsed==%d\r\n", val);
+	  
 	  printf("The Weight is:%dg", GetRealWeight(0)); fflush(stdout);//必须刷新输出流
     osDelay(500);
   }
@@ -144,7 +142,31 @@ void StartDefaultTask(void const * argument)
 
 /* Private application code --------------------------------------------------*/
 /* USER CODE BEGIN Application */
-     
+void Key_Regist()
+{
+	//重量清零
+	keys[0].GPIOx = WEIGHT_RES_GPIO_Port;
+	keys[0].GPIO_Pin = WEIGHT_RES_Pin;
+	keys[0].Key_count = 5;
+
+	//身高清零按键
+	keys[1].GPIOx = DISTANCE_RES_GPIO_Port;
+	keys[1].GPIO_Pin = DISTANCE_RES_Pin;
+	keys[1].Key_count = 5;
+
+	//备用1
+	keys[2].GPIOx = KEY1_GPIO_Port;
+	keys[2].GPIO_Pin = KEY1_Pin;
+	keys[2].Key_count = 5;
+
+	keys[3].GPIOx = KEY2_GPIO_Port;
+	keys[3].GPIO_Pin = KEY2_Pin;
+	keys[3].Key_count = 5;
+
+	keys[4].GPIOx = KEY3_GPIO_Port;
+	keys[4].GPIO_Pin = KEY3_Pin;
+	keys[4].Key_count = 5;
+}
 /* USER CODE END Application */
 
 /************************ (C) COPYRIGHT STMicroelectronics *****END OF FILE****/

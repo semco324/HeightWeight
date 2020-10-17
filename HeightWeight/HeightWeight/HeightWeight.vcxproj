@@ -78,6 +78,7 @@
   <ItemGroup>
     <ClCompile Include="..\..\Src\application.c" />
     <ClCompile Include="..\..\Src\APPTooL.c" />
+    <ClCompile Include="..\..\Src\button.c" />
     <ClCompile Include="..\..\Src\dwt_stm32_delay.c" />
     <ClCompile Include="..\..\Src\gpio.c" />
     <ClCompile Include="..\..\Src\adc.c" />
@@ -114,6 +115,7 @@
     <ClCompile Include="ultrasonic.c" />
     <ClInclude Include="..\..\Inc\application.h" />
     <ClInclude Include="..\..\Inc\APPTooL.h" />
+    <ClInclude Include="..\..\Inc\button.h" />
     <ClInclude Include="..\..\Inc\dwt_stm32_delay.h" />
     <ClInclude Include="BspConfig.h" />
     <ClInclude Include="system.h" />

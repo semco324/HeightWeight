@@ -372,6 +372,9 @@
     <ClCompile Include="..\..\Src\APPTooL.c">
       <Filter>Source files</Filter>
     </ClCompile>
+    <ClCompile Include="..\..\Src\button.c">
+      <Filter>Source files</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="BspConfig.h">
@@ -390,6 +393,9 @@
       <Filter>Header files</Filter>
     </ClInclude>
     <ClInclude Include="..\..\Inc\APPTooL.h">
+      <Filter>Header files</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\Inc\button.h">
       <Filter>Header files</Filter>
     </ClInclude>
   </ItemGroup>

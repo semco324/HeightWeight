@@ -16,35 +16,17 @@
 #define  UART_ULTRASONIC		&huart2			//超声波接口	
 #define  UART_TFT				&huart3			//TFT屏(武汉晶显)
 
-//称重清零
-#define WEIGHT_RES_Pin GPIO_PIN_0
-#define WEIGHT_RES_GPIO_Port GPIOA
-//距离清零
-#define DISTANCE_RES_Pin GPIO_PIN_1
-#define DISTANCE_RES_GPIO_Port GPIOA
+
 //电压检测引脚
 #define V_TEST_Pin GPIO_PIN_4
 #define V_TEST_GPIO_Port GPIOA
-//压力传感器引脚
-#define PRESSURE_DT_Pin GPIO_PIN_8
-#define PRESSURE_DT_GPIO_Port GPIOB
-#define PRESSURE_SCK_Pin GPIO_PIN_9
-#define PRESSURE_SCK_GPIO_Port GPIOB
 
-#define PRE_SCK		PBout(9)   //时钟
-#define PRE_DT		PBin(0);   //数据
 //------------------------------------------ 语音芯片WTN6040
 
 //#define  CLK_2A                 PBout(13) //时钟输出（位带操作）
 //#define  P_DATA_2A               PBout(12) //数据输出（位带操作）
-//备用按键
-#define KEY1_Pin GPIO_PIN_15
-#define KEY1_GPIO_Port GPIOB
-#define KEY2_Pin GPIO_PIN_8
-#define KEY2_GPIO_Port GPIOA
-#define KEY3_Pin GPIO_PIN_11
-#define KEY3_GPIO_Port GPIOA
+
 
 #define DIV 220              //比例因子
-#define ERROR		24     //误差调节   +1表示向上加10g 反之表示向下减10g
+#define ERROR		23     //误差调节   +1表示向上加10g 反之表示向下减10g
 #endif // !__BSPCONFIG_H

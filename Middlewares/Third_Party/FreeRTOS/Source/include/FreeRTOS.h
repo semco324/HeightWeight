@@ -1057,6 +1057,7 @@ typedef struct xSTATIC_TIMER
 
 #ifdef __cplusplus
 }
+
 #endif
 
 #endif /* INC_FREERTOS_H */

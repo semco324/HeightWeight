@@ -25,7 +25,7 @@
 #include "tim.h"
 #include "usart.h"
 #include "gpio.h"
-
+#include "button.h"
 /* Private includes ----------------------------------------------------------*/
 /* USER CODE BEGIN Includes */
 
@@ -89,11 +89,14 @@ int main(void)
 
   /* USER CODE BEGIN SysInit */
   DWT_Delay_Init();//微妙定时初始化
+  Hx711_Sck_Out(); //称重传感器初始化
+  Key_Gpio_init(); //按键接口初始化
+  Key_Regist();		//按键注册
   /* USER CODE END SysInit */
 
   /* Initialize all configured peripherals */
   //MX_GPIO_Init();
-  Hx711_Sck_Out();
+ 
   MX_ADC1_Init();
   MX_USART1_UART_Init();
   MX_USART2_UART_Init();
