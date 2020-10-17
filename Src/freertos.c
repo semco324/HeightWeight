@@ -133,8 +133,10 @@ void StartDefaultTask(void const * argument)
   {
 	  //Uart_printf(&huart1, "Uart2 is responsed\r\n");
 	 val = Read_Weigh(1000);
+	 
 	  //PBout(9) = 1;
-	  Uart_printf(&huart1, "Uart2 is responsed==%d\r\n",val);
+	 //Uart_printf(&huart1, "Uart2 is responsed==%d\r\n", val);
+	 printf("xiaowenlg:%ld", val/1000/24-348); fflush(stdout);//必须刷新输出流
     osDelay(500);
   }
   /* USER CODE END StartDefaultTask */

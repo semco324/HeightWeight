@@ -68,11 +68,12 @@ unsigned long Read_Weigh(uint32_t timout)
 	{
 		if (HAL_GPIO_ReadPin(PRESSURE_DT_GPIO_Port, PRESSURE_DT_Pin)==0)
 		{
-			Uart_printf(&huart1, "Test0==%d\r\n", HAL_GPIO_ReadPin(GPIOB, GPIO_PIN_8));
+			//Uart_printf(&huart1, "Test0==%d\r\n", HAL_GPIO_ReadPin(GPIOB, GPIO_PIN_8));
 			break;
 		}
 	}
-	Uart_printf(&huart1, "while--last\r\n");
+	//while (HAL_GPIO_ReadPin(PRESSURE_DT_GPIO_Port, PRESSURE_DT_Pin));
+	
 	for (i = 0; i < 24; i++)
 	{
 		PRE_SCK = 1;

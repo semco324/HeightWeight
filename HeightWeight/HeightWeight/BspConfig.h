@@ -50,5 +50,5 @@
 #define KEY3_Pin GPIO_PIN_11
 #define KEY3_GPIO_Port GPIOA
 
-#define DIV 21.47              //比例因子
+#define DIV 24              //比例因子
 #endif // !__BSPCONFIG_H
