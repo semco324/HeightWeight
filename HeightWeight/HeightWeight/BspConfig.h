@@ -29,4 +29,6 @@
 
 #define DIV 220              //比例因子
 #define ERROR		23     //误差调节   +1表示向上加10g 反之表示向下减10g
+
+#define BUTTON_SCAN_CYCLE			50      //按键扫描周期
 #endif // !__BSPCONFIG_H

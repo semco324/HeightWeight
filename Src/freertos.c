@@ -51,12 +51,22 @@
 /* USER CODE BEGIN Variables */
 uint16_t KeyValue_t = 0xffff; uint16_t lastvalue_t = 0xffff;
 Key_Message keys[5] = { 0 };
+
+//毛坯重量
+uint32_t Weight_Skin = 0;
+//线程句柄
+osThreadId SensorDriveHandle;//传感器驱动线程
+osThreadId ButtonProcessHandle;//按键处理线程
 /* USER CODE END Variables */
 osThreadId defaultTaskHandle;
 
 /* Private function prototypes -----------------------------------------------*/
 /* USER CODE BEGIN FunctionPrototypes */
-   
+void SensorDrive_CallBack(void const *argument);
+void  ButtonProcess_CallBack(void const *argument);
+
+//按键回调函数
+void  Key_CallBack(Key_Message index);
 /* USER CODE END FunctionPrototypes */
 
 void StartDefaultTask(void const * argument);
@@ -130,18 +140,54 @@ void StartDefaultTask(void const * argument)
 
   /* USER CODE BEGIN StartDefaultTask */
   /* Infinite loop */
-	unsigned long val = 0;
-  for(;;)
-  {
-	  
-	  printf("The Weight is:%dg", GetRealWeight(0)); fflush(stdout);//必须刷新输出流
-    osDelay(500);
-  }
+	//unsigned long val = 0;
+	//unsigned int  Weight_Shiwu = 0;
+ // for(;;)
+ // {
+	//  val = Read_Weigh_1(1000);
+	//  val = val / 100;
+	//  Weight_Shiwu = val;
+	//  Weight_Shiwu = (unsigned int)((float)Weight_Shiwu / 0.0214);
+	//  printf("The Weight is:%dg", GetRealWeight(0)); fflush(stdout);//必须刷新输出流**************************************
+	// //printf("The Weight is:%ldg", Weight_Shiwu); fflush(stdout);//必须刷新输出流
+ //   osDelay(500);
+	//
+ // }
+	taskENTER_CRITICAL();//进入临界区
+	//传感器驱动线程
+	osThreadDef(SensorDrive, SensorDrive_CallBack, 4, 0, 128);
+	SensorDriveHandle = osThreadCreate(osThread(SensorDrive), NULL);
+	//按键处理线程
+	osThreadDef(ButtonProcess, ButtonProcess_CallBack, 5, 0, 128);
+	ButtonProcessHandle = osThreadCreate(osThread(ButtonProcess), NULL);
+	Uart_printf(&huart1, "Start sub stask\r\n");
+	vTaskDelete(defaultTaskHandle); //删除任务
+	taskEXIT_CRITICAL();//推出临界区
   /* USER CODE END StartDefaultTask */
+	
 }
 
 /* Private application code --------------------------------------------------*/
 /* USER CODE BEGIN Application */
+
+void SensorDrive_CallBack(void const *argument)             //传感器操作线程
+{
+	for (;;)
+	{
+		//Uart_printf(&huart1, "xiaowenlg\r\n");
+		printf("The Weight is:%dg", GetRealWeight(Weight_Skin)); fflush(stdout);//必须刷新输出流**************************************
+		osDelay(500);
+	}
+}
+void  ButtonProcess_CallBack(void const *argument)
+{
+	for (;;)
+	{
+		ScanKeys(&KeyValue_t, &lastvalue_t, keys, Key_CallBack);
+		//Uart_printf(&huart1, "Task2\r\n");
+		osDelay(BUTTON_SCAN_CYCLE);
+	}
+}
 void Key_Regist()
 {
 	//重量清零
@@ -166,6 +212,20 @@ void Key_Regist()
 	keys[4].GPIOx = KEY3_GPIO_Port;
 	keys[4].GPIO_Pin = KEY3_Pin;
 	keys[4].Key_count = 5;
+}
+
+void  Key_CallBack(Key_Message index)
+{
+	static uint8_t i = 0, j = 0;
+	if (index.GPIO_Pin == WEIGHT_RES_Pin)
+	{
+
+		Weight_Skin = GetRealWeight(0);
+		//Uartx_printf(&huart1, "Weight_Skin=%dg",Weight_Skin);
+		Uartx_printf(&huart1, "Weight_Skin\r\n");
+	}
+	
+	//Uartx_printf(&huart1, "Key===%d\r\n", index);
 }
 /* USER CODE END Application */
 

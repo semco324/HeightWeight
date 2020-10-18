@@ -17,4 +17,5 @@ void Hx711_Data_In();
 void Hx711_Data_Out();
 unsigned long Read_Weigh(uint32_t timout);
 uint32_t GetRealWeight(unsigned long skin);
+unsigned long Read_Weigh_1(uint32_t timout);
 #endif // !__ULTRASONIC_H

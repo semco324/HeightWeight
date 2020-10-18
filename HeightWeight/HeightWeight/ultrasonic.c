@@ -99,3 +99,41 @@ uint32_t GetRealWeight(unsigned long skin)
 	uint32_t res = (val / DIV - 37991 - ERROR) * 10 - skin;
 	return res;
 }
+
+unsigned long Read_Weigh_1(uint32_t timout)
+{
+	uint8_t i = 0;
+	unsigned long Count = 0;//无符号4个字节
+	Hx711_Data_Out(); //设置IO输出
+	HAL_GPIO_WritePin(PRESSURE_DT_GPIO_Port, PRESSURE_DT_Pin, 1);
+	HAL_GPIO_WritePin(PRESSURE_SCK_GPIO_Port, PRESSURE_SCK_Pin, 0);
+	Hx711_Data_In(); //设置IO输入
+
+	long tim = HAL_GetTick();
+	while (HAL_GetTick() - tim < timout)
+	{
+		if (HAL_GPIO_ReadPin(PRESSURE_DT_GPIO_Port, PRESSURE_DT_Pin) == 0)
+		{
+			//Uart_printf(&huart1, "Test0==%d\r\n", HAL_GPIO_ReadPin(GPIOB, GPIO_PIN_8));
+			break;
+		}
+	}
+	//while (HAL_GPIO_ReadPin(PRESSURE_DT_GPIO_Port, PRESSURE_DT_Pin));
+
+	for (i = 0; i < 24; i++)
+	{
+		PRE_SCK = 1;
+		DWT_Delay_us(1);
+		Count = Count << 1;
+		PRE_SCK = 0;
+		if (HAL_GPIO_ReadPin(PRESSURE_DT_GPIO_Port, PRESSURE_DT_Pin))
+			Count++;
+		DWT_Delay_us(1);
+	}
+	PRE_SCK = 1;
+	DWT_Delay_us(1);
+	Count = Count ^ 0x800000;//^异或运算符,位值相同为0,不同为1
+	PRE_SCK = 0;
+	DWT_Delay_us(1);
+	return(Count);
+}
