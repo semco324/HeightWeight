@@ -187,8 +187,14 @@ void SensorDrive_CallBack(void const *argument)             //传感器操作线程
 	for (;;)
 	{
 		//Uart_printf(&huart1, "xiaowenlg\r\n");
+		if (uart1_rec.reover == 1)
+		{
+			uart1_rec.reover = 0;
+			Uart_printf(&huart1, uart1_rec.redata); //等待蓝牙信息
+
+		}
 		printf("The Weight is:%dg", GetRealWeight(Weight_Skin)); fflush(stdout);//必须刷新输出流**************************************
-		osDelay(500);
+		osDelay(20);
 	}
 }
 void  ButtonProcess_CallBack(void const *argument)
@@ -239,7 +245,10 @@ void  Key_CallBack(Key_Message index)
 		//Uartx_printf(&huart1, "Weight_Skin=%dg",Weight_Skin);
 		Uartx_printf(&huart1, "Weight_Skin\r\n");
 	}
-	
+	if (index.GPIO_Pin==DISTANCE_RES_Pin)
+	{
+		Uartx_printf(&huart1, "*****************************\r\n");
+	}
 	//Uartx_printf(&huart1, "Key===%d\r\n", index);
 }
 /* USER CODE END Application */

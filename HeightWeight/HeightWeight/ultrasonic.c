@@ -98,14 +98,14 @@ uint32_t GetRealWeight(unsigned long skin)
 	uint32_t res_temp = 0,res = 0;
 	uint8_t i = 0;
 	//val = Read_Weigh(1000);
-	for (i = 0; i < 5;i++)
+	for (i = 0; i < 15;i++)
 	{
 		val = Read_Weigh(1000);
-		//val = KalmanFilter(val, 0.1, 0.5);
+		val = KalmanFilter(val, 1, 0.1);
 		//HAL_Delay(2);
-		valsum += val;
+		//valsum += val;
 	}
-	val = valsum / 5;             //求平均值
+	//val = valsum / 30;             //求平均值
 	res_temp = (val / DIV - 37991 - ERROR) * 10 - skin;
 	
 	if (abs(res_temp) < 200000)
