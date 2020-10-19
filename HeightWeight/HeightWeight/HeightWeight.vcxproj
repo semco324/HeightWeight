@@ -83,6 +83,7 @@
     <ClCompile Include="..\..\Src\gpio.c" />
     <ClCompile Include="..\..\Src\adc.c" />
     <ClCompile Include="..\..\Src\freertos.c" />
+    <ClCompile Include="..\..\Src\stmflash.c" />
     <ClCompile Include="..\..\Src\tim.c" />
     <ClCompile Include="..\..\Src\usart.c" />
     <ClCompile Include="..\..\Src\stm32f1xx_it.c" />
@@ -117,6 +118,7 @@
     <ClInclude Include="..\..\Inc\APPTooL.h" />
     <ClInclude Include="..\..\Inc\button.h" />
     <ClInclude Include="..\..\Inc\dwt_stm32_delay.h" />
+    <ClInclude Include="..\..\Inc\stmflash.h" />
     <ClInclude Include="BspConfig.h" />
     <ClInclude Include="system.h" />
     <ClInclude Include="ultrasonic.h" />

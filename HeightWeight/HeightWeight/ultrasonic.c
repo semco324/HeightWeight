@@ -94,9 +94,27 @@ unsigned long Read_Weigh(uint32_t timout)
 ///取实际重量=测试-毛坯
 uint32_t GetRealWeight(unsigned long skin)
 {
-	unsigned long val = 0;
-	val = Read_Weigh(1000);
-	uint32_t res = (val / DIV - 37991 - ERROR) * 10 - skin;
+	unsigned long val = 0,valsum = 0;
+	uint32_t res_temp = 0,res = 0;
+	uint8_t i = 0;
+	//val = Read_Weigh(1000);
+	for (i = 0; i < 5;i++)
+	{
+		val = Read_Weigh(1000);
+		//val = KalmanFilter(val, 0.1, 0.5);
+		//HAL_Delay(2);
+		valsum += val;
+	}
+	val = valsum / 5;             //求平均值
+	res_temp = (val / DIV - 37991 - ERROR) * 10 - skin;
+	
+	if (abs(res_temp) < 200000)
+	{
+		res = res_temp;
+	}
+	else
+		res = 0;
+	
 	return res;
 }
 
@@ -136,4 +154,33 @@ unsigned long Read_Weigh_1(uint32_t timout)
 	PRE_SCK = 0;
 	DWT_Delay_us(1);
 	return(Count);
+}
+
+double KalmanFilter(const double ResrcData, double ProcessNiose_Q, double MeasureNoise_R)
+{
+	double R = MeasureNoise_R;
+	double Q = ProcessNiose_Q;
+
+	static        double x_last;
+
+	double x_mid = x_last;
+	double x_now;
+
+	static        double p_last;
+
+	double p_mid;
+	double p_now;
+	double kg;
+
+	x_mid = x_last; //x_last=x(k-1|k-1),x_mid=x(k|k-1)
+	p_mid = p_last + Q; //p_mid=p(k|k-1),p_last=p(k-1|k-1),Q=噪声
+	kg = p_mid / (p_mid + R); //kg为kalman filter，R为噪声
+	x_now = x_mid + kg*(ResrcData - x_mid);//估计出的最优值
+
+	p_now = (1 - kg)*p_mid;//最优值对应的covariance        
+
+	p_last = p_now; //更新covariance值
+	x_last = x_now; //更新系统状态值
+
+	return x_now;
 }

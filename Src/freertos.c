@@ -30,6 +30,7 @@
 #include "ultrasonic.h"
 #include "BspConfig.h"
 #include "button.h"
+#include "stmflash.h"
 /* USER CODE END Includes */
 
 /* Private typedef -----------------------------------------------------------*/
@@ -54,6 +55,11 @@ Key_Message keys[5] = { 0 };
 
 //毛坯重量
 uint32_t Weight_Skin = 0;
+uint16_t Skin_arr[2] = {0};   //毛皮重量数组，为存到mcuflash中
+
+//flash中
+uint32_t Weight_flash = 0;
+uint16_t Weight_flash_array[2] = {0};
 //线程句柄
 osThreadId SensorDriveHandle;//传感器驱动线程
 osThreadId ButtonProcessHandle;//按键处理线程
@@ -119,6 +125,11 @@ void MX_FREERTOS_Init(void) {
 
   /* Create the thread(s) */
   /* definition and creation of defaultTask */
+	STMFLASH_Read(FLASH_BEGIN, Weight_flash_array, 2);
+	Weight_flash = Weight_flash_array[1];
+	Weight_flash = (Weight_flash << 16) + Weight_flash_array[0];
+	Weight_Skin = Weight_flash;
+	Uartx_printf(&huart1, "The Weight_skin is %d\r\n", Weight_flash);
   osThreadDef(defaultTask, StartDefaultTask, osPriorityNormal, 0, 128);
   defaultTaskHandle = osThreadCreate(osThread(defaultTask), NULL);
 
@@ -161,6 +172,7 @@ void StartDefaultTask(void const * argument)
 	osThreadDef(ButtonProcess, ButtonProcess_CallBack, 5, 0, 128);
 	ButtonProcessHandle = osThreadCreate(osThread(ButtonProcess), NULL);
 	Uart_printf(&huart1, "Start sub stask\r\n");
+	
 	vTaskDelete(defaultTaskHandle); //删除任务
 	taskEXIT_CRITICAL();//推出临界区
   /* USER CODE END StartDefaultTask */
@@ -216,11 +228,14 @@ void Key_Regist()
 
 void  Key_CallBack(Key_Message index)
 {
-	static uint8_t i = 0, j = 0;
-	if (index.GPIO_Pin == WEIGHT_RES_Pin)
+
+	if (index.GPIO_Pin == WEIGHT_RES_Pin) //清零
 	{
 
 		Weight_Skin = GetRealWeight(0);
+		Skin_arr[0] = Weight_Skin & 0x0000ffff;
+		Skin_arr[1] = Weight_Skin >> 16;
+		STMFLASH_Write(FLASH_BEGIN, Skin_arr, 2);//把清零数据存储到flash中
 		//Uartx_printf(&huart1, "Weight_Skin=%dg",Weight_Skin);
 		Uartx_printf(&huart1, "Weight_Skin\r\n");
 	}

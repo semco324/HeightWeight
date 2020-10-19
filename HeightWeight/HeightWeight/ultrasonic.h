@@ -18,4 +18,5 @@ void Hx711_Data_Out();
 unsigned long Read_Weigh(uint32_t timout);
 uint32_t GetRealWeight(unsigned long skin);
 unsigned long Read_Weigh_1(uint32_t timout);
+double KalmanFilter(const double ResrcData, double ProcessNiose_Q, double MeasureNoise_R);//¿¨¶ûÂüÂË²¨
 #endif // !__ULTRASONIC_H
