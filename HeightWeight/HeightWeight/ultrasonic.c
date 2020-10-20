@@ -101,11 +101,10 @@ uint32_t GetRealWeight(unsigned long skin)
 	for (i = 0; i < 10;i++)
 	{
 		val = Read_Weigh(1000);
-		val = KalmanFilter(val, 100, 0.36);
-		//HAL_Delay(2);
-		//valsum += val;
+		//val = KalmanFilter(val, 100, 0.36);
+		valsum += val;
 	}
-	//val = valsum / 30;             //求平均值
+	val = valsum / 10;             //求平均值
 	res_temp = (val / DIV - 37991 - ERROR) * 10 - skin;
 	
 	if (abs(res_temp) < 200000)

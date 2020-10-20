@@ -60,6 +60,9 @@ uint16_t Skin_arr[2] = {0};   //毛皮重量数组，为存到mcuflash中
 //flash中
 uint32_t Weight_flash = 0;
 uint16_t Weight_flash_array[2] = {0};
+
+//距离传感器变量
+uint16_t Distance = 0;
 //线程句柄
 osThreadId SensorDriveHandle;//传感器驱动线程
 osThreadId ButtonProcessHandle;//按键处理线程
@@ -186,20 +189,23 @@ void SensorDrive_CallBack(void const *argument)             //传感器操作线程
 {
 	for (;;)
 	{
+		MY_USART_SendByte(&huart2, 0x55);
 		//Uart_printf(&huart1, "xiaowenlg\r\n");
 		
-		printf("The Weight is:%dg", GetRealWeight(Weight_Skin)); fflush(stdout);//必须刷新输出流**************************************
-		osDelay(20);
+	//printf("The Weight is:%dg", GetRealWeight(Weight_Skin)); fflush(stdout);//必须刷新输出流**************************************
+		osDelay(500);
 	}
 }
 void  ButtonProcess_CallBack(void const *argument)
 {
 	for (;;)
 	{
-		if (uart3_rec.reover == 1)
+		if (uart2_rec.reover == 1)
 		{
-			uart3_rec.reover = 0;
-			Uart_printf(&huart3, uart3_rec.redata); //等待蓝牙信息
+			uart2_rec.reover = 0;
+			Distance = uart2_rec.redata[0] * 256 + uart2_rec.redata[1];
+			Uart_printf(&huart1, "The Distance is %d mm\r\n",Distance); //等待蓝牙信息-0
+			//Uart_printf(&huart1, uart2_rec.redata);
 
 		}
 		ScanKeys(&KeyValue_t, &lastvalue_t, keys, Key_CallBack);
@@ -249,7 +255,7 @@ void  Key_CallBack(Key_Message index)
 	}
 	if (index.GPIO_Pin==DISTANCE_RES_Pin)
 	{
-		Uartx_printf(&huart1, "*****************************\r\n");
+		//Uartx_printf(&huart1, "*****************************\r\n");
 	}
 	//Uartx_printf(&huart1, "Key===%d\r\n", index);
 }
