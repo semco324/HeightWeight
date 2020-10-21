@@ -73,10 +73,17 @@ void MX_GPIO_Init(void)
   //GPIO_InitStruct.Speed = GPIO_SPEED_FREQ_HIGH;
   //HAL_GPIO_Init(GPIOB, &GPIO_InitStruct);
 
+
 }
 
 /* USER CODE BEGIN 2 */
-
+void Led_Init()
+{
+	GPIO_InitTypeDef GPIO_InitStruct = { 0 };
+	__HAL_RCC_GPIOA_CLK_ENABLE();
+	HAL_GPIO_WritePin(LED_LEFT_PORT, LED_LEFT_PIN, 0);
+	HAL_GPIO_WritePin(LED_RITHT_PORT, LED_RIGHT_PIN, 0);
+}
 /* USER CODE END 2 */
 
 /************************ (C) COPYRIGHT STMicroelectronics *****END OF FILE****/

@@ -192,8 +192,8 @@ void SensorDrive_CallBack(void const *argument)             //传感器操作线程
 		MY_USART_SendByte(&huart2, 0x55);
 		//Uart_printf(&huart1, "xiaowenlg\r\n");
 		
-	//printf("The Weight is:%dg", GetRealWeight(Weight_Skin)); fflush(stdout);//必须刷新输出流**************************************
-		osDelay(500);
+	printf("The Weight is:%dg", GetRealWeight(Weight_Skin)); fflush(stdout);//必须刷新输出流**************************************
+		osDelay(300);
 	}
 }
 void  ButtonProcess_CallBack(void const *argument)

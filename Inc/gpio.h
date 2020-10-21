@@ -32,7 +32,11 @@
 /* USER CODE END Includes */
 
 /* USER CODE BEGIN Private defines */
-
+	 //Á½¸öledµÆ
+#define LED_LEFT_PIN    GPIO_PIN_5
+#define LED_LEFT_PORT   GPIOA
+#define LED_RIGHT_PIN   GPIO_PIN_6
+#define LED_RITHT_PORT	GPIOA
 /* USER CODE END Private defines */
 
 void MX_GPIO_Init(void);
