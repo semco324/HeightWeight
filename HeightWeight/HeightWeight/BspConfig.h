@@ -32,4 +32,9 @@
 #define WEIGHT_MAX	4294967
 
 #define BUTTON_SCAN_CYCLE			50      //按键扫描周期
+
+
+//芯片flash空间定义
+#define CHIP_CAPACITY				128			//芯片flash容量单位Kb
+#define CHIP_START_ADDRESS			0x08000000
 #endif // !__BSPCONFIG_H

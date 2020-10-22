@@ -77,7 +77,7 @@ void MX_GPIO_Init(void)
 }
 
 /* USER CODE BEGIN 2 */
-void Led_Init()
+void Led_Init()                      //led≥ı ºªØ
 {
 	GPIO_InitTypeDef GPIO_InitStruct = { 0 };
 	__HAL_RCC_GPIOA_CLK_ENABLE();

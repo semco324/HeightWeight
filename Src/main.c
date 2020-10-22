@@ -88,7 +88,7 @@ int main(void)
   SystemClock_Config();
 
   /* USER CODE BEGIN SysInit */
-  DWT_Delay_Init();//微妙定时初始化
+  DWT_Delay_Init();//微秒定时初始化
   Hx711_Sck_Out(); //称重传感器初始化
   Key_Gpio_init(); //按键接口初始化
   Key_Regist();		//按键注册
