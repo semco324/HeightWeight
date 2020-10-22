@@ -31,6 +31,7 @@
 #include "BspConfig.h"
 #include "button.h"
 #include "stmflash.h"
+#include "gpio.h"
 /* USER CODE END Includes */
 
 /* Private typedef -----------------------------------------------------------*/
@@ -128,10 +129,12 @@ void MX_FREERTOS_Init(void) {
 
   /* Create the thread(s) */
   /* definition and creation of defaultTask */
+	/////////////////////////////////////////////////////////////////////////////////////////////////////
 	STMFLASH_Read(FLASH_BEGIN, Weight_flash_array, 2);
 	Weight_flash = Weight_flash_array[1];
 	Weight_flash = (Weight_flash << 16) + Weight_flash_array[0];
 	Weight_Skin = Weight_flash;
+	/////////////////////////////////////////////////////////////////////////////////////////////////////
 	Uartx_printf(&huart1, "The Weight_skin is %d\r\n", Weight_flash);
   osThreadDef(defaultTask, StartDefaultTask, osPriorityNormal, 0, 128);
   defaultTaskHandle = osThreadCreate(osThread(defaultTask), NULL);
@@ -190,9 +193,12 @@ void SensorDrive_CallBack(void const *argument)             //传感器操作线程
 	for (;;)
 	{
 		MY_USART_SendByte(&huart2, 0x55);
-		//Uart_printf(&huart1, "xiaowenlg\r\n");
 		
+		//Uart_printf(&huart1, "xiaowenlg\r\n");
+		//Read_Weigh(1000);
+		//GetRealWeight(Weight_Skin);
 	printf("The Weight is:%dg", GetRealWeight(Weight_Skin)); fflush(stdout);//必须刷新输出流**************************************
+		
 		osDelay(300);
 	}
 }
@@ -209,6 +215,7 @@ void  ButtonProcess_CallBack(void const *argument)
 
 		}
 		ScanKeys(&KeyValue_t, &lastvalue_t, keys, Key_CallBack);
+		HAL_GPIO_TogglePin(GPIOA, GPIO_PIN_5);
 		///Uart_printf(&huart1, "Task2\r\n");
 		osDelay(BUTTON_SCAN_CYCLE);
 

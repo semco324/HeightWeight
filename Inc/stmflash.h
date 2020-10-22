@@ -18,7 +18,7 @@
 
 //////////////////////////////////////////////////////////////////////////////////////////////////////
 //用户根据自己的需要设置
-#define STM32_FLASH_SIZE			512      //stm32flash 大小	
+#define STM32_FLASH_SIZE			128      //stm32flash 大小	
 #define STM32_FLASH_BASE			0x08000000   //起始地址
 #define FLASH_BEGIN_BASE(n)					STM32_FLASH_BASE+(STM32_FLASH_SIZE-n)*1024    //n为扇区个数
 #define FLASH_BEGIN                 FLASH_BEGIN_BASE(2)                                   //操作内存开始地址 倒数第二个地址段

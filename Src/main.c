@@ -92,6 +92,8 @@ int main(void)
   Hx711_Sck_Out(); //称重传感器初始化
   Key_Gpio_init(); //按键接口初始化
   Key_Regist();		//按键注册
+  Led_Init();       //led初始化
+  
   /* USER CODE END SysInit */
 
   /* Initialize all configured peripherals */
