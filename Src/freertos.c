@@ -32,6 +32,7 @@
 #include "button.h"
 #include "stmflash.h"
 #include "gpio.h"
+#include "application.h"
 /* USER CODE END Includes */
 
 /* Private typedef -----------------------------------------------------------*/
@@ -64,6 +65,7 @@ uint16_t Weight_flash_array[2] = {0};
 
 //距离传感器变量
 uint16_t Distance = 0;
+uint8_t soi = 0;//语音地址变量
 //线程句柄
 osThreadId SensorDriveHandle;//传感器驱动线程
 osThreadId ButtonProcessHandle;//按键处理线程
@@ -199,7 +201,7 @@ void SensorDrive_CallBack(void const *argument)             //传感器操作线程
 		//GetRealWeight(Weight_Skin);
 	printf("The Weight is:%dg", GetRealWeight(Weight_Skin)); fflush(stdout);//必须刷新输出流**************************************
 		
-		osDelay(300);
+		osDelay(500);
 	}
 }
 void  ButtonProcess_CallBack(void const *argument)
@@ -262,7 +264,14 @@ void  Key_CallBack(Key_Message index)
 	}
 	if (index.GPIO_Pin==DISTANCE_RES_Pin)
 	{
-		//Uartx_printf(&huart1, "*****************************\r\n");
+		//Uartx_printf(&huart1, "*****************************\r\n");///在实际板中测试成功
+		
+		WTN6040_PlayOneByte(soi);                //单条语音播报成功
+		soi++;
+		if (soi>61)
+		{
+			soi = 0;
+		}
 	}
 	//Uartx_printf(&huart1, "Key===%d\r\n", index);
 }
