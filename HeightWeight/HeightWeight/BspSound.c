@@ -2,13 +2,18 @@
 #include "APPTooL.h"
 #include "application.h"
 #include "BspConfig.h"
-uint8_t sonundArray[5] = { HUAN_YING, BEN_XIANG_MU, TI_ZHI_ZHI_SHU, CESHI, QING_ZHAN_LI};
+uint8_t sonundArray[6] = { HUAN_YING, BEN_XIANG_MU, TI_ZHI_ZHI_SHU, CESHI, QING_ZHAN_LI};
 //uint8_t dalaytim[4] = { 0xf3,YIN_XIAO_61,0xf8,10};				//F3H + µÿ÷∑ + F8H + 10H
-void Firstmuis()
+void Firstmuis()            //ø™Õ∑”Ô“Ù
 {
 	WTN6040_PlayArray(5, sonundArray);
+	osDelay(300);
+	WTN6040_PlayOneByte(QING_AN_KAISHI);
 	//WTN6040_PlayArray(4, dalaytim);
-	osDelay(2000);
+	/**/
+}
+void BeginSound()
+{
 	WTN6040_PlayOneByte(YIN_XIAO_61);
 	osDelay(100);
 	WTN6040_PlayOneByte(CESHI_KAISHI);

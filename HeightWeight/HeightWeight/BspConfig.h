@@ -45,6 +45,7 @@
 #define TI_ZHI_ZHI_SHU				28						//体质指数
 #define QING_ZHAN_LI				37						//请您站立在测试位并保持静止不动，以增加测试结果准确性
 #define YIN_XIAO_61					61						//音效61
+#define QING_AN_KAISHI				41						//请按开始建开始
 #define CESHI_KAISHI				44						//测试开始
 #define CESHI_JIESHU				45						//测试结束
 #define NINDE						33						//您的

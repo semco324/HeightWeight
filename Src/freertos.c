@@ -198,6 +198,7 @@ void SensorDrive_CallBack(void const *argument)             //传感器操作线程
 {
 	uint8_t len = 0;
 	uint8_t arr[30] = {0};
+	Firstmuis();
 	for (;;)
 	{
 		MY_USART_SendByte(&huart2, 0x55);
@@ -270,6 +271,7 @@ void  Key_CallBack(Key_Message index)
 	if (index.GPIO_Pin==DISTANCE_RES_Pin)
 	{
 		//Uartx_printf(&huart1, "*****************************\r\n");///在实际板中测试成功
+		BeginSound();
 		PlayHei_Wei(170.0, 50.00);
 	}
 	//Uartx_printf(&huart1, "Key===%d\r\n", index);
