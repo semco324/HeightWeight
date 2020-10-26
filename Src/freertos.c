@@ -33,6 +33,7 @@
 #include "stmflash.h"
 #include "gpio.h"
 #include "application.h"
+#include "BspSound.h"
 /* USER CODE END Includes */
 
 /* Private typedef -----------------------------------------------------------*/
@@ -68,7 +69,7 @@ uint16_t Distance = 0;
 uint8_t soi = 0;//语音地址变量
 
 //语音播报地址数组
-//uint8_t sonundArray[3];
+uint8_t height_array[16] = {0};
 //线程句柄
 osThreadId SensorDriveHandle;//传感器驱动线程
 osThreadId ButtonProcessHandle;//按键处理线程
@@ -205,11 +206,6 @@ void SensorDrive_CallBack(void const *argument)             //传感器操作线程
 		//Read_Weigh(1000);
 		//GetRealWeight(Weight_Skin);
 	//printf("The Weight is:%dg", GetRealWeight(Weight_Skin)); fflush(stdout);//必须刷新输出流**************************************
-		len = DataSeparation(1234.567,arr);
-		for (int i = 0; i < len;i++)
-		{
-			Uart_printf(&huart1, "arr:%x\r\n", arr[i]);
-		}
 		osDelay(500);
 	}
 }
@@ -274,14 +270,7 @@ void  Key_CallBack(Key_Message index)
 	if (index.GPIO_Pin==DISTANCE_RES_Pin)
 	{
 		//Uartx_printf(&huart1, "*****************************\r\n");///在实际板中测试成功
-		
-		//WTN6040_PlayOneByte(soi);                //单条语音播报成功
-		//soi++;
-		//if (soi>61)
-		//{
-		//	soi = 0;
-		//}
-		Firstmuis();
+		PlayHei_Wei(170.0, 50.00);
 	}
 	//Uartx_printf(&huart1, "Key===%d\r\n", index);
 }

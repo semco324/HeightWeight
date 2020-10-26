@@ -47,4 +47,14 @@
 #define YIN_XIAO_61					61						//音效61
 #define CESHI_KAISHI				44						//测试开始
 #define CESHI_JIESHU				45						//测试结束
+#define NINDE						33						//您的
+#define SHEN_GAO					35						//身高
+#define TI_ZHONG					36						//体重
+#define SOUND_BIM					28						//体质指数
+#define GONG_JIN					16						//公斤
+#define GONG_FEN					17						//公分
+#define	TI_XING						49						//体型
+#define PIAN_PANG					50						//偏胖
+#define PIAN_SHOU					51						//偏瘦
+#define ZHENG_CHANG					52						//正常
 #endif // !__BSPCONFIG_H
