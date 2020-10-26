@@ -70,6 +70,8 @@ uint8_t soi = 0;//语音地址变量
 
 //语音播报地址数组
 uint8_t height_array[16] = {0};
+uint32_t sound_weight = 0;
+
 //线程句柄
 osThreadId SensorDriveHandle;//传感器驱动线程
 osThreadId ButtonProcessHandle;//按键处理线程
@@ -198,6 +200,7 @@ void SensorDrive_CallBack(void const *argument)             //传感器操作线程
 {
 	uint8_t len = 0;
 	uint8_t arr[30] = {0};
+	WTN6040_PlayOneByte(0xe8);//调节音量
 	Firstmuis();
 	for (;;)
 	{
@@ -206,7 +209,8 @@ void SensorDrive_CallBack(void const *argument)             //传感器操作线程
 		//Uart_printf(&huart1, "xiaowenlg\r\n");
 		//Read_Weigh(1000);
 		//GetRealWeight(Weight_Skin);
-	//printf("The Weight is:%dg", GetRealWeight(Weight_Skin)); fflush(stdout);//必须刷新输出流**************************************
+		sound_weight = GetRealWeight(Weight_Skin);
+		printf("The Weight is:%dg", abs(sound_weight)); fflush(stdout);//必须刷新输出流**************************************
 		osDelay(500);
 	}
 }
@@ -272,7 +276,12 @@ void  Key_CallBack(Key_Message index)
 	{
 		//Uartx_printf(&huart1, "*****************************\r\n");///在实际板中测试成功
 		BeginSound();
-		PlayHei_Wei(170.0, 50.00);
+		osDelay(2000);//等待数据稳定
+		if (abs(sound_weight)>50)
+		{
+			PlayHei_Wei(Distance/100.0, abs(sound_weight) / 1000.00);
+		}
+		
 	}
 	//Uartx_printf(&huart1, "Key===%d\r\n", index);
 }

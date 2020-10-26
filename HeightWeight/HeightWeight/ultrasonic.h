@@ -9,7 +9,7 @@
 #define PRESSURE_SCK_Pin GPIO_PIN_1			//时钟引脚		   实验板GPIO_PIN_1						开发板GPIO_PIN_9	
 #define PRESSURE_SCK_GPIO_Port GPIOB
 
-#define PRE_SCK		PBout(9)   //时钟
+#define PRE_SCK		PBout(1)   //时钟
 #define PRE_DT		PBin(0);   //数据
 
 void Hx711_Sck_Out();
