@@ -270,6 +270,19 @@ uint8_t WTN6040_PlayArray(uint8_t arrlen, uint8_t *soundarr)
 	//Line_2A_WTN6(9);
 	return res;
 }
+uint8_t WTN6040_PlayArray_1(uint8_t arrlen, uint8_t *soundarr)
+{
+	uint8_t res = 0;
+	uint8_t i = 0;
+	for (i = 0; i < arrlen; i++)
+	{
+		WTN6040_PlayOneByte(soundarr[i]);
+		//osDelay(10);
+		//Uart_printf(&DEBUG_UART.huart, "Data=========%d:%x\r\n", i, soundarr[i]);//测试播放数据
+	}
+	
+	return res;
+}
 #endif
 //************************************
 // 函数:    playmusic

@@ -37,4 +37,14 @@
 //芯片flash空间定义
 #define CHIP_CAPACITY				128			//芯片flash容量单位Kb
 #define CHIP_START_ADDRESS			0x08000000
+
+//语音地址
+#define HUAN_YING					43							//欢迎使用启帆体测项目
+#define BEN_XIANG_MU					26                        //本项目为您进行
+#define CESHI						27						  //测试
+#define TI_ZHI_ZHI_SHU				28						//体质指数
+#define QING_ZHAN_LI				37						//请您站立在测试位并保持静止不动，以增加测试结果准确性
+#define YIN_XIAO_61					61						//音效61
+#define CESHI_KAISHI				44						//测试开始
+#define CESHI_JIESHU				45						//测试结束
 #endif // !__BSPCONFIG_H

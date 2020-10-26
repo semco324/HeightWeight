@@ -113,6 +113,7 @@
     <ClCompile Include="..\..\Drivers\STM32F1xx_HAL_Driver\Src\stm32f1xx_hal_flash.c" />
     <ClCompile Include="..\..\Drivers\STM32F1xx_HAL_Driver\Src\stm32f1xx_hal_flash_ex.c" />
     <ClCompile Include="..\..\Drivers\STM32F1xx_HAL_Driver\Src\stm32f1xx_hal_gpio.c" />
+    <ClCompile Include="BspSound.c" />
     <ClCompile Include="ultrasonic.c" />
     <ClInclude Include="..\..\Inc\application.h" />
     <ClInclude Include="..\..\Inc\APPTooL.h" />
@@ -120,6 +121,7 @@
     <ClInclude Include="..\..\Inc\dwt_stm32_delay.h" />
     <ClInclude Include="..\..\Inc\stmflash.h" />
     <ClInclude Include="BspConfig.h" />
+    <ClInclude Include="BspSound.h" />
     <ClInclude Include="system.h" />
     <ClInclude Include="ultrasonic.h" />
     <None Include="stm32.mak" />

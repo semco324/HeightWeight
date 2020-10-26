@@ -1,6 +1,7 @@
 #include "APPTooL.h"
 #include <string.h>
 #include "BspConfig.h"
+#include "usart.h"
 uint8_t lasttrivalue[TRLENGHT] = { 0 };
 
 /*
@@ -59,6 +60,7 @@ uint8_t DataSeparation(double dat, uint8_t *res_dat)//Êı¾İ·ÖÀë-------------´øĞ¡Ê
 	//»ñÈ¡Ç§·ÖÎ»²¿·Ö
 	uint8_t qf = (int)(dat * 1000) % 10;
 	//printf("qf:%d\r\n", (int)(dat * 1000));
+	
 	//ÅĞ¶ÏÇ§·ÖÎ»ÊÇ·ñ´óÓÚµÈÓÚ5
 
 	intlen = PrepartData(intData, res_dat);
