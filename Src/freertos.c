@@ -63,11 +63,12 @@ uint16_t Skin_arr[2] = {0};   //毛皮重量数组，为存到mcuflash中
 //flash中
 uint32_t Weight_flash = 0;
 uint16_t Weight_flash_array[2] = {0};
-
+uint16_t Height_flash_array[1] = { 0 };//传感器到地面高度
 //距离传感器变量
 uint16_t Distance = 0;
 uint8_t soi = 0;//语音地址变量
-
+uint16_t AllDistance = 0;       //传感器到地面高度
+uint16_t Height_res = 0;
 //语音播报地址数组
 uint8_t height_array[16] = {0};
 uint32_t sound_weight = 0;
@@ -139,11 +140,14 @@ void MX_FREERTOS_Init(void) {
   /* definition and creation of defaultTask */
 	/////////////////////////////////////////////////////////////////////////////////////////////////////
 	STMFLASH_Read(FLASH_BEGIN, Weight_flash_array, 2);
+	STMFLASH_Read(FLASH_BEGIN + 6, Height_flash_array, 1);//读高度记录
 	Weight_flash = Weight_flash_array[1];
 	Weight_flash = (Weight_flash << 16) + Weight_flash_array[0];
 	Weight_Skin = Weight_flash;
+	AllDistance = Height_flash_array[0];
 	/////////////////////////////////////////////////////////////////////////////////////////////////////
 	Uartx_printf(&huart1, "The Weight_skin is %d\r\n", Weight_flash);
+	Uartx_printf(&huart1, "The Height_skin is %d\r\n", Height_flash_array[0]);
   osThreadDef(defaultTask, StartDefaultTask, osPriorityNormal, 0, 128);
   defaultTaskHandle = osThreadCreate(osThread(defaultTask), NULL);
 
@@ -200,7 +204,7 @@ void SensorDrive_CallBack(void const *argument)             //传感器操作线程
 {
 	uint8_t len = 0;
 	uint8_t arr[30] = {0};
-	WTN6040_PlayOneByte(0xe8);//调节音量
+	WTN6040_PlayOneByte(0xe1);//调节音量
 	Firstmuis();
 	for (;;)
 	{
@@ -222,7 +226,12 @@ void  ButtonProcess_CallBack(void const *argument)
 		{
 			uart2_rec.reover = 0;
 			Distance = uart2_rec.redata[0] * 256 + uart2_rec.redata[1];
-			Uart_printf(&huart1, "The Distance is %d mm\r\n",Distance); //等待蓝牙信息-0
+			if (AllDistance >= Distance)
+				Height_res = AllDistance - Distance;
+			else
+				Height_res = 0;
+			Uart_printf(&huart1, "The ResDistance is %d mm\r\n", Height_res); //等待蓝牙信息-0
+			Uart_printf(&huart1, "The Distance is %d mm\r\n", Distance); //等待蓝牙信息-0
 			//Uart_printf(&huart1, uart2_rec.redata);
 
 		}
@@ -275,13 +284,16 @@ void  Key_CallBack(Key_Message index)
 	if (index.GPIO_Pin==DISTANCE_RES_Pin)
 	{
 		//Uartx_printf(&huart1, "*****************************\r\n");///在实际板中测试成功
-		BeginSound();
-		osDelay(2000);//等待数据稳定
-		if (abs(sound_weight)>50)
-		{
-			PlayHei_Wei(Distance/100.0, abs(sound_weight) / 1000.00);
-		}
-		
+		//********************************************************************************************
+		//BeginSound();
+		//osDelay(2000);//等待数据稳定
+		//if (abs(sound_weight)>50)
+		//{
+		//	PlayHei_Wei(Distance/10.00, abs(sound_weight) / 1000.00);
+		//}
+		//**********************************************************
+		AllDistance = Distance;
+		STMFLASH_Write(FLASH_BEGIN+6, &Distance, 1);
 	}
 	//Uartx_printf(&huart1, "Key===%d\r\n", index);
 }
