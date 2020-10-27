@@ -60,6 +60,6 @@
 #define ZHENG_CHANG					52						//正常
 
 //TFT屏
-#define TFT_VARIABLE_START		0x0002      //TFT屏变量起始地址
+#define TFT_VARIABLE_START		0x0001      //TFT屏变量起始地址
 #define TFT_BUTTON				0x4F		//TFT屏上的按钮
 #endif // !__BSPCONFIG_H
