@@ -34,6 +34,7 @@
 #include "gpio.h"
 #include "application.h"
 #include "BspSound.h"
+#include "adc.h"
 /* USER CODE END Includes */
 
 /* Private typedef -----------------------------------------------------------*/
@@ -205,16 +206,21 @@ void SensorDrive_CallBack(void const *argument)             //传感器操作线程
 	uint8_t len = 0;
 	uint8_t arr[30] = {0};
 	WTN6040_PlayOneByte(0xe1);//调节音量
-	Firstmuis();
+	//Firstmuis();
 	for (;;)
 	{
+		double bmires = 0.00;
 		MY_USART_SendByte(&huart2, 0x55);
 		
 		//Uart_printf(&huart1, "xiaowenlg\r\n");
 		//Read_Weigh(1000);
 		//GetRealWeight(Weight_Skin);
 		sound_weight = GetRealWeight(Weight_Skin);
-		printf("The Weight is:%dg", abs(sound_weight)); fflush(stdout);//必须刷新输出流**************************************
+		bmires = Cal_BMI_TFT(sound_weight,Height_res);
+		uint16_t TFT_bmi = (uint16_t)(bmires * 1000);
+		printf("The ADC value is ==============%d\r\n", TFT_bmi); fflush(stdout);
+		printf("The Weight is:%dg\r\n", abs(sound_weight)); fflush(stdout);//必须刷新输出流**************************************
+		
 		osDelay(500);
 	}
 }
@@ -235,6 +241,7 @@ void  ButtonProcess_CallBack(void const *argument)
 			//Uart_printf(&huart1, uart2_rec.redata);
 
 		}
+		
 		ScanKeys(&KeyValue_t, &lastvalue_t, keys, Key_CallBack);
 		HAL_GPIO_TogglePin(GPIOA, GPIO_PIN_5);
 		///Uart_printf(&huart1, "Task2\r\n");
@@ -304,8 +311,16 @@ void  Key_CallBack(Key_Message index)
 		{
 			PlayHei_Wei(Height_res / 10.00, abs(sound_weight) / 1000.00);
 		}
+		
 	}
 	//Uartx_printf(&huart1, "Key===%d\r\n", index);
+}
+//向TFT屏发送数据
+void SendMessageToTFT(uint16_t address)
+{
+	uint16_t TFT_SendArray[15] = { 0 };
+	write_multiple_variable_store_82(address, 15, TFT_SendArray);
+	write_register_80_1byte(TFT_BUTTON, 1);
 }
 /* USER CODE END Application */
 

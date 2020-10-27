@@ -10,4 +10,5 @@ uint8_t ProcessWeight(double numdata);//体重;
 uint8_t ProcessBMI(double numdata);//bmi;
 double Cal_BMI(double hei, double wei); //身高/体重的平方;
 void PlayHei_Wei(double height, double wei);
+double Cal_BMI_TFT(uint32_t wi, uint16_t hi);
 #endif // !__BSPSOUND_H

@@ -2,6 +2,7 @@
 #include "APPTooL.h"
 #include "application.h"
 #include "BspConfig.h"
+
 uint8_t sonundArray[6] = { HUAN_YING, BEN_XIANG_MU, TI_ZHI_ZHI_SHU, CESHI, QING_ZHAN_LI};
 //uint8_t dalaytim[4] = { 0xf3,YIN_XIAO_61,0xf8,10};				//F3H + 地址 + F8H + 10H
 void Firstmuis()            //开头语音
@@ -96,4 +97,13 @@ void PlayHei_Wei(double height, double wei)          //总体播放函数
 	}
 	else if (bmi >= 28.00)
 		WTN6040_PlayOneByte(PIAN_PANG);
+}
+double Cal_BMI_TFT(uint32_t wi, uint16_t hi)
+{
+	double h = 0.00, w = 0.00, res = 0.00;
+	h = hi / 1000.00;
+	w = abs(wi) / 1000.00;
+	res = w / (h*h);
+	//uint16_t TFT_bmi = (uint16_t)(bmi_1 * 100);
+	return  res;
 }
