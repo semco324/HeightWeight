@@ -87,6 +87,7 @@ void PlayHei_Wei(double height, double wei)          //总体播放函数
 	ProcessBMI(bmi);
 	osDelay(300);
 	WTN6040_PlayOneByte(TI_XING);
+	osDelay(200);
 	if (bmi <= 18.40)
 	{
 		WTN6040_PlayOneByte(PIAN_SHOU);
@@ -97,6 +98,8 @@ void PlayHei_Wei(double height, double wei)          //总体播放函数
 	}
 	else if (bmi >= 28.00)
 		WTN6040_PlayOneByte(PIAN_PANG);
+	osDelay(200);
+	WTN6040_PlayOneByte(HUAN_ZAI_CI_YING);
 }
 double Cal_BMI_TFT(uint32_t wi, uint16_t hi)
 {
