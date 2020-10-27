@@ -314,9 +314,15 @@ void  Key_CallBack(Key_Message index)
 		tip_flag = 1;
 		BeginSound();
 		osDelay(2000);//等待数据稳定
-		if (abs(sound_weight)>50)
+		if (abs(sound_weight) > 200)                                   //大于0.2公斤才播放
 		{
 			PlayHei_Wei(Height_res / 10.00, abs(sound_weight) / 1000.00);
+		}
+		else
+		{
+			WTN6040_PlayOneByte(QING_ZHAN_LI);
+			osDelay(300);
+			WTN6040_PlayOneByte(QING_AN_KAISHI);
 		}
 		
 	}
