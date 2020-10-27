@@ -231,7 +231,7 @@ void  ButtonProcess_CallBack(void const *argument)
 			else
 				Height_res = 0;
 			Uart_printf(&huart1, "The ResDistance is %d mm\r\n", Height_res); //等待蓝牙信息-0
-			Uart_printf(&huart1, "The Distance is %d mm\r\n", Distance); //等待蓝牙信息-0
+			//Uart_printf(&huart1, "The Distance is %d mm\r\n", Distance); //等待蓝牙信息-0
 			//Uart_printf(&huart1, uart2_rec.redata);
 
 		}
@@ -294,6 +294,16 @@ void  Key_CallBack(Key_Message index)
 		//**********************************************************
 		AllDistance = Distance;
 		STMFLASH_Write(FLASH_BEGIN+6, &Distance, 1);
+	}
+	if (index.GPIO_Pin==KEY1_Pin)
+	{
+		//Uartx_printf(&huart1, "*****************************\r\n");
+		BeginSound();
+		osDelay(2000);//等待数据稳定
+		if (abs(sound_weight)>50)
+		{
+			PlayHei_Wei(Height_res / 10.00, abs(sound_weight) / 1000.00);
+		}
 	}
 	//Uartx_printf(&huart1, "Key===%d\r\n", index);
 }
