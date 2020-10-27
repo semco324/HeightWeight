@@ -222,6 +222,7 @@ void SensorDrive_CallBack(void const *argument)             //传感器操作线程
 #if DEBUG_PRINT
 		printf("The Weight is:%dg\r\n", abs(sound_weight)); fflush(stdout);//必须刷新输出流**************************************
 #endif		
+		HAL_GPIO_TogglePin(LED_LEFT_PORT, LED_LEFT_PIN);//线程活动指示灯
 		osDelay(500);
 	}
 }
@@ -259,7 +260,7 @@ void  ButtonProcess_CallBack(void const *argument)
 			}
 		}
 		ScanKeys(&KeyValue_t, &lastvalue_t, keys, Key_CallBack);
-		HAL_GPIO_TogglePin(GPIOA, GPIO_PIN_5);
+		HAL_GPIO_TogglePin(LED_RITHT_PORT, LED_RIGHT_PIN);                  //线程活动指示灯
 		///Uart_printf(&huart1, "Task2\r\n");
 		osDelay(BUTTON_SCAN_CYCLE);
 
